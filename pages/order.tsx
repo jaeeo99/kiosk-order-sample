@@ -1,4 +1,6 @@
+import {useState, useContext} from 'react';
 import styled from 'styled-components';
+import {MenuContext} from '../data/context';
 import Advertise from '../components/Advertise';
 import Menu from '../components/Menu';
 import Cart from '../components/Cart';
@@ -42,25 +44,32 @@ const NavArea = styled.div`
 
 
 const Order = () => {
+  const [selectedMenu, setSelectedMenu] = useState([]);
+  const menuContext = {
+    items: selectedMenu,
+    setItems: setSelectedMenu
+  };
   return (
     <Page>
-      <PageInnerWrapper>
-        <ADArea>
-          <Advertise />
-        </ADArea>
-        <MenuArea>
-          <Menu />
-        </MenuArea>
-        <CartArea>
-          <Cart />
-        </CartArea>
-        <PaymentArea>
-          <Payment />
-        </PaymentArea>
-        <NavArea>
-          <NavFooter />
-        </NavArea>
-      </PageInnerWrapper>
+      <MenuContext.Provider value={menuContext}>
+        <PageInnerWrapper>
+          <ADArea>
+            <Advertise />
+          </ADArea>
+          <MenuArea>
+            <Menu />
+          </MenuArea>
+          <CartArea>
+            <Cart />
+          </CartArea>
+          <PaymentArea>
+            <Payment />
+          </PaymentArea>
+          <NavArea>
+            <NavFooter />
+          </NavArea>
+        </PageInnerWrapper>
+      </MenuContext.Provider>
     </Page>
   );
 }

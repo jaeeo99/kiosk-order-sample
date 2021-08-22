@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {menuTabItems, menuList} from '../../data/menu';
+import {MenuContext} from '../../data/context';
 import SetModal from './SetModal';
 
 const MenuTabWrapper = styled.div`
@@ -88,6 +89,11 @@ const MenuList = (props) => {
   const {index} = props;
   const [menus, setMenus] = useState([]);
   const [menuLength, setMenuLength] = useState(0);
+  const menu = useContext(MenuContext);
+  const {items, setItems} = menu;
+  const onMenuClick = (menu) => {
+    setItems(items.concat(menu));
+  };
   useEffect(() => {
     setMenus(menuList.filter((menu) => menu.type == menuTabItems[index].type));
     setMenuLength(menuTabItems[index].itemLength);
@@ -95,7 +101,7 @@ const MenuList = (props) => {
   return (
     <MenuListWrapper length={menuLength}>
       {menus.map((menu, idx) => 
-        <MenuListItem key={idx}>
+        <MenuListItem key={idx} onClick={() => onMenuClick(menu)}>
           <MenuListImage src={`/menu/${menu.type}_${idx}.png`} size={menuLength}/>
           <MenuListName>{menu.menuName}</MenuListName>
           {menu.menuInfo && <MenuListInfo>{menu.menuInfo}</MenuListInfo>}
@@ -122,7 +128,7 @@ const Menu = () => {
         <MenuTab index={menuTabIndex} onClick={selectMenuTab}></MenuTab>
         <MenuList index={menuTabIndex}></MenuList>
       </MenuWrapper>
-      <SetModal />
+      {/* <SetModal active/> */}
     </>
   );
 }

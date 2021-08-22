@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext, useState, useEffect} from 'react';
+import {MenuContext} from '../data/context';
 import styled from 'styled-components';
 
 const CartWrapper = styled.div`
@@ -67,7 +68,7 @@ const CartItemsController = styled.div`
   flex-basis: 65px;
   width: 65px;
   height: 65px;
-  background-color: #bdbdbd;
+  background-color: ${(props) => props.active ? '#000000' : '#bdbdbd'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,7 +84,9 @@ const CartItems = styled.div`
 `;
 
 const CartItemsWrapper = styled.div`
-  width: ${props => props.itemLength ? props.itemLength * 370 + 'px' : 0};
+  width: ${props => props.itemLength ? props.itemLength * 370 + 'px' : '0'};
+  transform: translateX(${props => props.position ? `-${props.position * 370}px` : '0px'});
+  transition: .2s transform;
 `
 
 const CartItemWrapper = styled.div`
@@ -128,34 +131,89 @@ const CartItemPrice = styled.span`
   color: #de0000;
 `;
 
+const CartItemsEmptyWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const CartItemsEmpty = styled.span`
+  font-family: S-CoreDream-6;
+  font-size: 30px;
+  font-weight: 600;
+  color: #bdbdbd;
+`
+
 const CartItem = (props) => {
-  const {item} = props;
-  const {name, price} = item;
+  const {item, idx} = props;
+  const {menuName, price} = item;
+
+  const menu = useContext(MenuContext);
+  const {items, setItems} = menu;
+  const onClickDelete = () => {
+    const temp = [].concat(items);
+    temp.splice(idx,1)
+    setItems(temp);
+  }
   return (
     <CartItemWrapper>
-      <CartItemClose>X</CartItemClose>
-      <CartItemName>{name}</CartItemName>
+      <CartItemClose onClick={onClickDelete}>X</CartItemClose>
+      <CartItemName>{menuName}</CartItemName>
       <CartItemPrice>{price}원</CartItemPrice>
     </CartItemWrapper>
   );
 }
 
-const Cart = (props) => {
-  const {items = [{name: '통새우와퍼라지셋1', price: 1900},{name: '통새우와퍼라지셋1', price: 1900},{name: '통새우와퍼라지셋1', price: 1900}]} = props;
+const Cart = () => {
+  const menu = useContext(MenuContext);
+  const {items} = menu;
+  const [position, setPosition] = useState(0);
+  const [arrowActivate, setArrowActivate] = useState({left: false, right: false});
+  const onClickLeftArrow = () => {
+    if(arrowActivate.left) {
+      setPosition(position - 1);
+    }
+  };
+  const onClickRightArrow = () => {
+    if(arrowActivate.right) {
+      setPosition(position + 1);
+    }
+  }
+  useEffect(() => {
+    const leftActivate = position !== 0;
+    const rightActivate = items.length > position + 2;
+    setArrowActivate({
+      left: leftActivate,
+      right: rightActivate
+    });
+    if (position > items.length - 2) {
+      setPosition(items.length - 2);
+    }
+  }, [position, items]);
   return (
     <CartWrapper>
       <CartInfo>
         <ItemSize>카트<ItemBadge active={items.length !== 0}>{items.length}</ItemBadge></ItemSize>
-        <ItemsPrice>총 주문 금액 <Price active={items.length !== 0}>{items.reduce((total, item) => total + item.price, 0)}원</Price></ItemsPrice>
+        <ItemsPrice>총 주문 금액 <Price active={items.length !== 0}>{items.reduce((total, item) => total + parseInt(item.price, 10), 0)}원</Price></ItemsPrice>
       </CartInfo>
       <CartItemList>
-        <CartItemsController>{'<'}</CartItemsController>
+        <CartItemsController active={arrowActivate.left} onClick={onClickLeftArrow}>{'<'}</CartItemsController>
         <CartItems>
-          <CartItemsWrapper itemLength={items.length}>
-            {items.map((item, idx) => <CartItem key={idx} item={item}/>)}
-          </CartItemsWrapper>
+          {items.length === 0 ?
+            <CartItemsEmptyWrapper>
+              <CartItemsEmpty>
+                카드에 담긴 상품이 없습니다
+              </CartItemsEmpty>
+            </CartItemsEmptyWrapper>
+            :
+            <CartItemsWrapper position={position} itemLength={items.length}>
+              {items.map((item, idx) => <CartItem key={idx} idx={idx} item={item}/>)}
+            </CartItemsWrapper>
+          }
         </CartItems>
-        <CartItemsController>{'>'}</CartItemsController>
+        <CartItemsController active={arrowActivate.right} onClick={onClickRightArrow}>{'>'}</CartItemsController>
       </CartItemList>
     </CartWrapper>
   );

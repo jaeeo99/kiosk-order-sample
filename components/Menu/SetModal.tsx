@@ -75,12 +75,13 @@ const ModalButton = styled.div`
 `;
 
 const SetModal = (props) => {
+  const {active, menu} = props;
   const [menuTabIndex, setMenuTabIndex] = useState(0);
   const selectMenuTab = (index) => {
     setMenuTabIndex(index);
   };
-  return (
-    <>
+  return (<>
+    {active && <>
       <BackgroundMask />
       <Modal>
         <ModalWrapper>
@@ -91,8 +92,8 @@ const SetModal = (props) => {
           </ModalFooter>
         </ModalWrapper>
       </Modal>
-    </>
-  );
+    </>}
+  </>);
 }
 
 export default SetModal;
