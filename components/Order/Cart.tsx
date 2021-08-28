@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {MenuContext} from '../data/context';
+import {MenuContext} from '../../data/context';
 import styled from 'styled-components';
 
 const CartWrapper = styled.div`

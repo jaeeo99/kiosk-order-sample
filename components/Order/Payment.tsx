@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {MenuContext, PageContext} from '../data/context';
+import {MenuContext, PageContext} from '../../data/context';
 import styled from 'styled-components';
 
 const PaymentWrapper = styled.div`
