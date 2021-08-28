@@ -1,5 +1,11 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import {useState, useContext} from 'react';
+import {MenuContext, PageContext} from '../data/context';
+import Advertise from '../components/Advertise';
+import Menu from '../components/Menu';
+import Order from '../components/Order';
+import Cart from '../components/Cart';
+import Payment from '../components/Payment';
+import NavFooter from '../components/NavFooter';
 import styled from 'styled-components';
 
 const Page = styled.div`
@@ -54,11 +60,11 @@ const TouchSubIntroduction = styled.span`
 `;
 
 
-const Home = () => {
-  const router = useRouter();
+const HomePage = () => {
+  const {setPage} = useContext(PageContext);
   const handleClick = (e: any) => {
     e.preventDefault();
-    router.push('/order');
+    setPage("order");
   }
   return (
     <Page>
@@ -75,4 +81,103 @@ const Home = () => {
   );
 }
 
-export default Home;
+const ADArea = styled.div`
+  flex: 2.5 2.5 250px;
+`;
+
+const MenuArea = styled.div`
+  flex: 11.3 11.3 1130px;
+`;
+
+const CartArea = styled.div`
+  flex: 3.2 3.2 320px;
+`;
+
+const PaymentArea = styled.div`
+  flex: 1 1 100px;
+`;
+
+const NavArea = styled.div`
+  flex: 1.2 1.2 120px;
+`;
+
+
+const OrderPage = () => {
+  return (
+    <>
+      <ADArea>
+        <Advertise />
+      </ADArea>
+      <MenuArea>
+        <Menu />
+      </MenuArea>
+      <CartArea>
+        <Cart />
+      </CartArea>
+      <PaymentArea>
+        <Payment />
+      </PaymentArea>
+      <NavArea>
+        <NavFooter />
+      </NavArea>
+    </>
+  );
+}
+
+const OrderArea = styled.div`
+  flex: 15.5 15.5 1550px;
+`;
+
+const PaymentPage = () => {
+  return (
+    <>
+      <ADArea>
+        <Advertise />
+      </ADArea>
+      <OrderArea>
+        <Order />
+      </OrderArea>
+      <NavArea>
+        <NavFooter />
+      </NavArea>
+    </>
+  );
+}
+
+const Index = () => {
+  const [pageState, setPageState] = useState('home');
+  const [selectedMenu, setSelectedMenu] = useState([]);
+  const menuContext = {
+    items: selectedMenu,
+    setItems: setSelectedMenu
+  };
+
+  const pageContext = {
+    page: pageState,
+    setPage: setPageState
+  }
+
+  const renderPage = (state) => {
+    switch(state) {
+      case 'home':
+      default:
+        return <HomePage />;
+      case 'order':
+        return <OrderPage />;
+      case 'payment':
+        return <PaymentPage />;
+    }
+  }
+  return (<Page>
+    <PageContext.Provider value={pageContext}>
+      <MenuContext.Provider value={menuContext}>
+        <PageInnerWrapper>
+          {renderPage(pageState)}
+        </PageInnerWrapper>
+      </MenuContext.Provider>
+    </PageContext.Provider>
+  </Page>);
+}
+
+
+export default Index;

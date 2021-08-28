@@ -6,7 +6,7 @@ const menuTabItems = [
   {type: 'chicken', title: '치킨버거', itemLength: 6},
   {type: 'sidemenu', title: '사이드', itemLength: 12},
   {type: 'drink', title: '음료&디저트', itemLength: 12},
-]
+];
 
 const menuList = [
   {type: 'special', menuName: '몬스터Ⅱ팩1', menuInfo: '몬스터Ⅱ통새우+몬스터Ⅱ+프렌치프라이L+너겟킹4조각+콜라R2', price: '22700'},

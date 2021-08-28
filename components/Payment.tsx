@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {MenuContext} from '../data/context';
+import {MenuContext, PageContext} from '../data/context';
 import styled from 'styled-components';
 
 const PaymentWrapper = styled.div`
@@ -36,9 +36,18 @@ const Payment = () => {
   const [active, setActive] = useState(false);
   const menu = useContext(MenuContext);
   const {items, setItems} = menu;
+  const {setPage} = useContext(PageContext);
+  const setPaymentOrder = (e: any) => {
+    if(active) {
+      e.preventDefault();
+      setPage("payment");
+    }
+  }
 
   const clearItems = () => {
-    setItems([]);
+    if(active) {
+      setItems([]);
+    }
   }
   useEffect(() => {
     setActive(items.length !== 0);
@@ -46,7 +55,7 @@ const Payment = () => {
   return (
     <PaymentWrapper>
       <CancelButton active={active} onClick={clearItems}>취소</CancelButton>
-      <PaymentButton active={active}>결제하기</PaymentButton>
+      <PaymentButton active={active} onClick={setPaymentOrder}>결제하기</PaymentButton>
     </PaymentWrapper>
   );
 }

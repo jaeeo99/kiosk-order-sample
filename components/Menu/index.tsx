@@ -89,8 +89,7 @@ const MenuList = (props) => {
   const {index} = props;
   const [menus, setMenus] = useState([]);
   const [menuLength, setMenuLength] = useState(0);
-  const menu = useContext(MenuContext);
-  const {items, setItems} = menu;
+  const {items, setItems} = useContext(MenuContext);
   const onMenuClick = (menu) => {
     setItems(items.concat(menu));
   };
@@ -101,7 +100,7 @@ const MenuList = (props) => {
   return (
     <MenuListWrapper length={menuLength}>
       {menus.map((menu, idx) => 
-        <MenuListItem key={idx} onClick={() => onMenuClick(menu)}>
+        <MenuListItem key={idx} onClick={() => onMenuClick(Object.assign(menu, {img: `/menu/${menu.type}_${idx}.png`}))}>
           <MenuListImage src={`/menu/${menu.type}_${idx}.png`} size={menuLength}/>
           <MenuListName>{menu.menuName}</MenuListName>
           {menu.menuInfo && <MenuListInfo>{menu.menuInfo}</MenuListInfo>}

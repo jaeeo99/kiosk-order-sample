@@ -1,5 +1,5 @@
-import React from 'react';
-import {useRouter} from 'next/router';
+import React, {useContext} from 'react';
+import {PageContext, MenuContext} from '../data/context';
 import styled from 'styled-components';
 
 const Footer = styled.div`
@@ -51,10 +51,12 @@ const NavButtonItem = (props) => {
 }
 
 const NavFooter = () => {
-  const router = useRouter();
+  const {setItems} = useContext(MenuContext);
+  const {setPage} = useContext(PageContext);
   const handleClick = (e: any) => {
     e.preventDefault();
-    router.push('/');
+    setPage("home");
+    setItems([]);
   }
   return (
     <Footer>
