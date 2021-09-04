@@ -1,18 +1,20 @@
 import {createContext} from 'react';
 
 const menu = {
+  item: {},
   items: [],
-  setItems: () => {}
+  setItem: (item: {}) => {},
+  setItems: (items: []) => {}
 }
 
 const page = {
   page: 'home',
-  setPage: () => {}
+  setPage: (page: string) => {}
 }
 
 const step = {
   step: 0,
-  setStep: () => {}
+  setStep: (step: number) => {}
 }
 
 export const MenuContext = createContext(menu);

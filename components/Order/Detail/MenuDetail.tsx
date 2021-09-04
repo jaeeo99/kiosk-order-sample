@@ -1,13 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {menuTabItems, menuList} from '../../data/menu';
-import {MenuContext} from '../../data/context';
-import SetModal from './SetModal';
+import {menuTabItems, menuList} from '../../../data/menu';
+import {MenuContext} from '../../../data/context';
 
 const MenuTabWrapper = styled.div`
-  flex: 2 2 200px;
   display: grid;
-  height: 200px;
+  height: 10.42vh;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 `;
@@ -20,6 +18,7 @@ const MenuTabItem = styled.div`
   font-family: S-CoreDream-7;
   font-size: 30px;
   font-weight: 800;
+  overflow: hidden;
   color: ${props => props.active ? '#de0000' : 'rgba(0, 0, 0, 0.4)'};
   border-bottom: ${props => props.active ? '10px solid #de0000' : ''};
 `;
@@ -36,9 +35,8 @@ const MenuTab = (props) => {
 }
 
 const MenuListWrapper = styled.div`
-  flex: 9.3 9.3 930px;
+  height: 48.44vh;
   display: grid;
-  height: 930px;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: ${props => props.length === 6 ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)'};
 `;
@@ -51,11 +49,12 @@ const MenuListItem = styled.div`
   font-family: S-CoreDream-7;
   font-size: 30px;
   font-weight: 800;
+  overflow: hidden;
 `;
 
 const MenuListImage = styled.img`
   margin: 10px;
-  width: ${props => props.size === 6 ? '250px' : '200px'}
+  width: ${props => props.size === 6 ? '23.15vw' : '18.5vw'}
 `;
 
 const MenuListName = styled.span`
@@ -127,7 +126,6 @@ const Menu = () => {
         <MenuTab index={menuTabIndex} onClick={selectMenuTab}></MenuTab>
         <MenuList index={menuTabIndex}></MenuList>
       </MenuWrapper>
-      {/* <SetModal active/> */}
     </>
   );
 }

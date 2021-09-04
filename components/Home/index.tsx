@@ -1,5 +1,6 @@
 import {useContext} from 'react';
 import styled from 'styled-components';
+import {LgSpanWhite, MdSpanWhite} from '../StyledText';
 import {Page, PageInnerWrapper} from '../Page';
 import {PageContext} from '../../data/context';
 
@@ -24,23 +25,6 @@ const Footer = styled.footer`
   background-color: black;
 `;
 
-const TouchIntroduction = styled.span`
-  margin: 10px;
-  font-family: S-CoreDream-7;
-  font-size: 60px;
-  font-weight: 700;
-  color: #ffffff;
-`;
-
-const TouchSubIntroduction = styled.span`
-  margin: 8px;
-  font-family: S-CoreDream-7;
-  font-size: 40px;
-  font-weight: 700;
-  color: #ffffff;
-`;
-
-
 const HomePage = () => {
   const {setPage} = useContext(PageContext);
   const handleClick = (e: any) => {
@@ -54,8 +38,8 @@ const HomePage = () => {
           <MainImage src="/index/bg_index.jpg" />
         </Main>
         <Footer>
-          <TouchIntroduction>화면을 터치하세요</TouchIntroduction>
-          <TouchSubIntroduction>Start Order</TouchSubIntroduction>
+          <LgSpanWhite margin="10px">화면을 터치하세요</LgSpanWhite>
+          <MdSpanWhite margin="8px">Start Order</MdSpanWhite>
         </Footer>
       </PageInnerWrapper>
     </Page>

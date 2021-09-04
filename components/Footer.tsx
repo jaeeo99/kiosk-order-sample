@@ -1,13 +1,14 @@
 import React, {useContext} from 'react';
-import {PageContext, MenuContext} from '../data/context';
 import styled from 'styled-components';
+import { SmSpanWhite } from './StyledText';
+import {PageContext, MenuContext} from '../data/context';
 
 const Footer = styled.div`
-  padding: 0 65px;
+  padding: 0 6.02vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(100% - 130px);
+  width: calc(100% - 12.04vw);
   height: 100%;
   background-color: #000000;
 `;
@@ -30,22 +31,21 @@ const NavButtonIcon = styled.div`
   background-color: #ffffff;
 `;
 
-const NavButtonText = styled.span`
-  margin-top: 2px;
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 700;
-  color: #ffffff;
-`;
+interface INavButtonItem {
+  icon: string;
+  text: string;
+  align: string;
+  onClick?: (e: any) => void;
+}
 
-const NavButtonItem = (props) => {
+const NavButtonItem = (props: INavButtonItem) => {
   const {icon, text, onClick, align} = props;
   return (
     <NavButton onClick={onClick} style={{alignSelf: align}}>
       <NavButtonIcon>
         <img src={icon} />
       </NavButtonIcon>
-      <NavButtonText>{text}</NavButtonText>
+      <SmSpanWhite margin="2px 0 0 0">{text}</SmSpanWhite>
     </NavButton>
   );
 }

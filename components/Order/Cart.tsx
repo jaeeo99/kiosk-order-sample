@@ -1,6 +1,38 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {MenuContext} from '../../data/context';
 import styled from 'styled-components';
+import {MdSpanWhite, SmSpanBlack, SmSpanLightGray, SmSpanPrimary, SmSpanWhite} from '../StyledText';
+import {MenuContext, PageContext} from '../../data/context';
+
+interface IActivable {
+  active?: boolean;
+}
+
+interface ISlideItems {
+  position?: number;
+  itemLength?: number;
+}
+
+const PaymentWrapper = styled.div`
+  width: 100%;
+  height: 5.21vh;
+  display: flex;
+`;
+
+const CancelButton = styled.div<IActivable>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  background-color: ${props => props.active ? '#000000' : '#bdbdbd'};
+`;
+
+const PaymentButton = styled.div<IActivable>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  background-color: ${props => props.active ? '#de0000' : '#828282'};
+`;
 
 const CartWrapper = styled.div`
   display: flex;
@@ -20,22 +52,13 @@ const ItemSize = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 700;
-  color: #000000;
 `;
 
-const ItemBadge = styled.span`
+const ItemBadge = styled.span<IActivable>`
   margin: 0 0 0 10px;
   padding: 4px 31px;
   border-radius: 30px;
   background-color: ${props => props.active ? '#de0000' : '#828282'};
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 700;
-  text-align: center;
-  color: #ffffff;
 `;
 
 const ItemsPrice = styled.div`
@@ -43,13 +66,9 @@ const ItemsPrice = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 700;
-  color: #000000;
 `;
 
-const Price = styled.span`
+const Price = styled.span<IActivable>`
   margin-left: 20px;
   font-family: S-CoreDream-7;
   font-size: 30px;
@@ -64,15 +83,13 @@ const CartItemList = styled.div`
   background-color: #e0e0e0;
 `;
 
-const CartItemsController = styled.div`
-  flex-basis: 65px;
-  width: 65px;
-  height: 65px;
+const CartItemsController = styled.div<IActivable>`
+  width: 6vw;
+  height: 6vw;
   background-color: ${(props) => props.active ? '#000000' : '#bdbdbd'};
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: S-CoreDream-7;
   font-size: 40px;
   font-weight: 900;
   color: #ffffff;
@@ -83,7 +100,7 @@ const CartItems = styled.div`
   overflow: hidden;
 `;
 
-const CartItemsWrapper = styled.div`
+const CartItemsWrapper = styled.div<ISlideItems>`
   width: ${props => props.itemLength ? props.itemLength * 370 + 'px' : '0'};
   transform: translateX(${props => props.position ? `-${props.position * 370}px` : '0px'});
   transition: .2s transform;
@@ -92,14 +109,14 @@ const CartItemsWrapper = styled.div`
 const CartItemWrapper = styled.div`
   float: left;
   position: relative;
-  margin-left: 20px;
-  padding: 20px;
+  margin-left: 1.85vw;
+  padding: 1.85vw;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: space-around;
-  width: 310px;
-  height: 140px;
+  width: 28.7vw;
+  height: 7.3vh;
   border-radius: 5px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
@@ -112,23 +129,8 @@ const CartItemClose = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: S-CoreDream-7;
   font-size: 30px;
   font-weight: 900;
-`;
-
-const CartItemName = styled.span`
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 700;
-  color: #000000;
-`;
-
-const CartItemPrice = styled.span`
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 700;
-  color: #de0000;
 `;
 
 const CartItemsEmptyWrapper = styled.div`
@@ -137,14 +139,7 @@ const CartItemsEmptyWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
-
-const CartItemsEmpty = styled.span`
-  font-family: S-CoreDream-6;
-  font-size: 30px;
-  font-weight: 600;
-  color: #bdbdbd;
-`
+`;
 
 const CartItem = (props) => {
   const {item, idx} = props;
@@ -160,15 +155,17 @@ const CartItem = (props) => {
   return (
     <CartItemWrapper>
       <CartItemClose onClick={onClickDelete}>X</CartItemClose>
-      <CartItemName>{menuName}</CartItemName>
-      <CartItemPrice>{price}원</CartItemPrice>
+      <SmSpanBlack>{menuName}</SmSpanBlack>
+      <SmSpanPrimary>{price}원</SmSpanPrimary>
     </CartItemWrapper>
   );
 }
 
 const Cart = () => {
   const menu = useContext(MenuContext);
-  const {items} = menu;
+  const {items, setItems} = menu;
+  const {setPage} = useContext(PageContext);
+  const [active, setActive] = useState(false);
   const [position, setPosition] = useState(0);
   const [arrowActivate, setArrowActivate] = useState({left: false, right: false});
   const onClickLeftArrow = () => {
@@ -181,6 +178,22 @@ const Cart = () => {
       setPosition(position + 1);
     }
   }
+  const setPaymentOrder = (e: any) => {
+    if(active) {
+      e.preventDefault();
+      setPage("payment");
+    }
+  }
+
+  const clearItems = () => {
+    if(active) {
+      setItems([]);
+    }
+  }
+  useEffect(() => {
+    setActive(items.length !== 0);
+  }, [items]);
+
   useEffect(() => {
     const leftActivate = position !== 0;
     const rightActivate = items.length > position + 2;
@@ -192,20 +205,27 @@ const Cart = () => {
       setPosition(items.length - 2);
     }
   }, [position, items]);
+  
   return (
     <CartWrapper>
       <CartInfo>
-        <ItemSize>카트<ItemBadge active={items.length !== 0}>{items.length}</ItemBadge></ItemSize>
-        <ItemsPrice>총 주문 금액 <Price active={items.length !== 0}>{items.reduce((total, item) => total + parseInt(item.price, 10), 0)}원</Price></ItemsPrice>
+        <ItemSize>
+          <SmSpanBlack>카트</SmSpanBlack>
+          <ItemBadge active={items.length !== 0}>
+            <SmSpanWhite>{items.length}</SmSpanWhite>
+          </ItemBadge>
+        </ItemSize>
+        <ItemsPrice>
+          <SmSpanBlack>총 주문 금액</SmSpanBlack>
+          <Price active={items.length !== 0}>{items.reduce((total, item) => total + parseInt(item.price, 10), 0)}원</Price>
+        </ItemsPrice>
       </CartInfo>
       <CartItemList>
         <CartItemsController active={arrowActivate.left} onClick={onClickLeftArrow}>{'<'}</CartItemsController>
         <CartItems>
           {items.length === 0 ?
             <CartItemsEmptyWrapper>
-              <CartItemsEmpty>
-                카드에 담긴 상품이 없습니다
-              </CartItemsEmpty>
+              <SmSpanLightGray>카드에 담긴 상품이 없습니다</SmSpanLightGray>
             </CartItemsEmptyWrapper>
             :
             <CartItemsWrapper position={position} itemLength={items.length}>
@@ -215,6 +235,14 @@ const Cart = () => {
         </CartItems>
         <CartItemsController active={arrowActivate.right} onClick={onClickRightArrow}>{'>'}</CartItemsController>
       </CartItemList>
+      <PaymentWrapper>
+        <CancelButton active={active} onClick={clearItems}>
+          <MdSpanWhite>취소</MdSpanWhite>
+        </CancelButton>
+        <PaymentButton active={active} onClick={setPaymentOrder}>
+          <MdSpanWhite>결제하기</MdSpanWhite>
+        </PaymentButton>
+      </PaymentWrapper>
     </CartWrapper>
   );
 }

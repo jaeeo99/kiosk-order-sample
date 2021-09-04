@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import Advertise from '../Advertise';
-import Order from './Order';
-import NavFooter from '../NavFooter';
+import Step from './Step';
+import Footer from '../Footer';
 
 const ADArea = styled.div`
-  flex: 2.5 2.5 250px;
+  height: 13.02vh;
 `;
 
-const NavArea = styled.div`
-  flex: 1.2 1.2 120px;
+const FooterArea = styled.div`
+  height: 6.25vh;
 `;
 
-const OrderArea = styled.div`
-  flex: 15.5 15.5 1550px;
-`
+const StepArea = styled.div`
+  height: 80.73vh;
+`;
 
 const PaymentPage = () => {
   return (
@@ -21,12 +21,12 @@ const PaymentPage = () => {
       <ADArea>
         <Advertise />
       </ADArea>
-      <OrderArea>
-        <Order />
-      </OrderArea>
-      <NavArea>
-        <NavFooter />
-      </NavArea>
+      <StepArea>
+        <Step />
+      </StepArea>
+      <FooterArea>
+        <Footer />
+      </FooterArea>
     </>
   );
 };

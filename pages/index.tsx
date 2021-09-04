@@ -6,9 +6,12 @@ import OrderPage from '../components/Order';
 import PaymentPage from '../components/Payment';
 
 const Index = () => {
-  const [pageState, setPageState] = useState('home');
+  const [selectedItem, selectItem] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState([]);
+  const [pageState, setPageState] = useState('home');
   const menuContext = {
+    item: selectedItem,
+    setItem: selectItem,
     items: selectedMenu,
     setItems: setSelectedMenu
   };
@@ -18,7 +21,7 @@ const Index = () => {
     setPage: setPageState
   }
 
-  const renderPage = (state) => {
+  const renderPage = (state: string) => {
     switch(state) {
       case 'home':
       default:
