@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import styled from 'styled-components';
-import {MenuContext, PageContext, StepContext} from '../../../data/context';
+import {MenuContext, PageContext} from '../../../data/context';
 import { LgSpanBlack, LgSpanPrimary, SmSpanLightBlack } from '../../StyledText';
 
 const ComplateOrderArea = styled.div`

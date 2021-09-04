@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {MdSpanWhite, SmSpanBlack, SmSpanLightGray, SmSpanPrimary, SmSpanWhite} from '../StyledText';
-import {MenuContext, PageContext} from '../../data/context';
+import {IItem, MenuContext, PageContext} from '../../data/context';
 
 interface IActivable {
   active?: boolean;
@@ -141,7 +141,12 @@ const CartItemsEmptyWrapper = styled.div`
   justify-content: center;
 `;
 
-const CartItem = (props) => {
+interface ICartItem {
+  item: IItem;
+  idx: number;
+}
+
+const CartItem = (props: ICartItem) => {
   const {item, idx} = props;
   const {menuName, price} = item;
 

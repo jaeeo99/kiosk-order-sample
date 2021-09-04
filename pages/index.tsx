@@ -1,13 +1,13 @@
 import {useState} from 'react';
-import {MenuContext, PageContext} from '../data/context';
+import {IItem, MenuContext, PageContext} from '../data/context';
 import {Page, PageInnerWrapper} from '../components/Page';
 import HomePage from '../components/Home';
 import OrderPage from '../components/Order';
 import PaymentPage from '../components/Payment';
 
 const Index = () => {
-  const [selectedItem, selectItem] = useState(null);
-  const [selectedMenu, setSelectedMenu] = useState([]);
+  const [selectedItem, selectItem] = useState<IItem | null>(null);
+  const [selectedMenu, setSelectedMenu] = useState<IItem[]>([]);
   const [pageState, setPageState] = useState('home');
   const menuContext = {
     item: selectedItem,

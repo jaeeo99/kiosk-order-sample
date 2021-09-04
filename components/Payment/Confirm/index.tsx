@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import styled from 'styled-components';
-import {MenuContext, PageContext, StepContext} from '../../../data/context';
+import {MenuContext, PageContext, StepContext, IItem} from '../../../data/context';
 import { MdSpanBlack, MdSpanPrimary, MdSpanWhite, SmSpanBlack, SmSpanLightBlack, SmSpanBoldGray, SmSpanPrimary } from '../../StyledText';
 
 const OrderedItemWrapper = styled.div`
@@ -43,13 +43,17 @@ const OrderedItemPrice = styled.div`
   justify-content: space-between;
 `;
 
-const OrderedItem = (props) => {
+interface IOrderedItem {
+  item: IItem;
+}
+
+const OrderedItem = (props: IOrderedItem) => {
   const {item} = props;
   return <OrderedItemWrapper>
     <OrderedItemTitle>
-      <MdSpanBlack>{item.menuName}</MdSpanBlack>
-      <MdSpanPrimary>{item.price}원</MdSpanPrimary>
-      <img src={item.img}/>
+      <MdSpanBlack>{item?.menuName}</MdSpanBlack>
+      <MdSpanPrimary>{item?.price}원</MdSpanPrimary>
+      <img src={item?.img}/>
     </OrderedItemTitle>
     <OrderedItemSize>
       <SmSpanBoldGray>수량</SmSpanBoldGray>
@@ -57,7 +61,7 @@ const OrderedItem = (props) => {
     </OrderedItemSize>
     <OrderedItemPrice>
       <SmSpanBlack>합계금액</SmSpanBlack>
-      <SmSpanPrimary>{item.price}원</SmSpanPrimary>
+      <SmSpanPrimary>{item?.price}원</SmSpanPrimary>
     </OrderedItemPrice>
   </OrderedItemWrapper>;
 }
@@ -124,7 +128,7 @@ const Confirm = () => {
   const {items} = useContext(MenuContext);
   const {setPage} = useContext(PageContext);
   const {setStep} = useContext(StepContext);
-  const price = items.reduce((total, item) => total + parseInt(item.price, 10), 0);
+  const price = items.reduce((total, item) => total + parseInt(item?.price, 10), 0);
   return <>
     <OrderedMenuArea>
       {items.map((item, idx) => <OrderedItem key={idx} item={item} />)}
