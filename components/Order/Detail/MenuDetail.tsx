@@ -1,133 +1,167 @@
 import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {menuTabItems, menuList} from '../../../data/menu';
-import {MenuContext} from '../../../data/context';
+import { MdSpanWhite, SmSpanBlack, SmSpanLightGray, SmSpanPrimary, SmSpanWhite, XsSpanWhite } from '../../StyledText';
+// import { menuTabItems, menuList } from '../../../data/menu';
+import { MenuContext } from '../../../data/context';
 
-const MenuTabWrapper = styled.div`
-  display: grid;
-  height: 10.42vh;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-`;
-
-const MenuTabItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid 1px rgba(0, 0, 0, 0.4);
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 800;
-  overflow: hidden;
-  color: ${props => props.active ? '#de0000' : 'rgba(0, 0, 0, 0.4)'};
-  border-bottom: ${props => props.active ? '10px solid #de0000' : ''};
-`;
-
-const MenuTab = (props) => {
-  const {index, onClick} = props;
-  return (
-    <MenuTabWrapper>
-      {menuTabItems.map((tabItem, idx) => 
-        <MenuTabItem key={idx} onClick={() => onClick(idx)} active={idx === index}>{tabItem.title}</MenuTabItem>
-      )}
-    </MenuTabWrapper>
-  )
-}
-
-const MenuListWrapper = styled.div`
-  height: 48.44vh;
-  display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: ${props => props.length === 6 ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)'};
-`;
-
-const MenuListItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 800;
-  overflow: hidden;
-`;
-
-const MenuListImage = styled.img`
-  margin: 10px;
-  width: ${props => props.size === 6 ? '23.15vw' : '18.5vw'}
-`;
-
-const MenuListName = styled.span`
-  font-family: S-CoreDream-7;
-  margin: 10px;
-  font-size: 30px;
-  font-weight: 700;
-  text-align: center;
-  color: #000000;
-`;
-
-const MenuListInfo = styled.span`
-  font-family: S-CoreDream-6;
-  margin: 10px;
-  margin-top: 0;
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-  color: rgba(0, 0, 0, 0.6);
-`;
-
-const MenuListPrice = styled.span`
-  font-family: S-CoreDream-7;
-  font-size: 30px;
-  font-weight: 700;
-  text-align: center;
-  color: #de0000;
-`;
-
-const MenuList = (props) => {
-  const {index} = props;
-  const [menus, setMenus] = useState([]);
-  const [menuLength, setMenuLength] = useState(0);
-  const {items, setItems} = useContext(MenuContext);
-  const onMenuClick = (menu) => {
-    setItems(items.concat(menu));
-  };
-  useEffect(() => {
-    setMenus(menuList.filter((menu) => menu.type == menuTabItems[index].type));
-    setMenuLength(menuTabItems[index].itemLength);
-  }, [index]);
-  return (
-    <MenuListWrapper length={menuLength}>
-      {menus.map((menu, idx) => 
-        <MenuListItem key={idx} onClick={() => onMenuClick(Object.assign(menu, {img: `/menu/${menu.type}_${idx}.png`}))}>
-          <MenuListImage src={`/menu/${menu.type}_${idx}.png`} size={menuLength}/>
-          <MenuListName>{menu.menuName}</MenuListName>
-          {menu.menuInfo && <MenuListInfo>{menu.menuInfo}</MenuListInfo>}
-          <MenuListPrice>{menu.price}원</MenuListPrice>
-        </MenuListItem>
-      )}
-    </MenuListWrapper>
-  )
-}
 
 const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 58.85vh;
 `;
 
-const Menu = () => {
-  const [menuTabIndex, setMenuTabIndex] = useState(0);
-  const selectMenuTab = (index) => {
-    setMenuTabIndex(index);
-  };
+const MenuNav = styled.div`
+  height: 5.21vh;
+  padding: 0 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const BackBtn = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const BlankDiv = styled.div`
+  width: 85px;
+`;
+
+const MenuIntro = styled.div`
+  height: 5.21vh;
+  padding: 0 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const MenuSub = styled.div`
+  height: 32.81vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SubMenuWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SubMenuImg = styled.img`
+  width: 250px;
+  margin: 20px;
+`;
+// const SubMenuBtn = styled.div`
+//   margin: 60px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 175px;
+//   height: 50px;
+//   border-radius: 5px;
+//   background-color: #000;
+// `;
+
+const SubMenu = (props) => {
+  const {item} = props;
+  return <SubMenuWrapper>
+    <SubMenuImg src={item.img}/>
+    <SmSpanBlack>{item.menuName}</SmSpanBlack>
+    {/* <SubMenuBtn>
+      <SmSpanWhite>재료변경</SmSpanWhite>
+    </SubMenuBtn> */}
+  </SubMenuWrapper>;
+}
+const MenuPrice = styled.div`
+  height: 5.21vh;
+  padding: 0 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const MenuButtonWrapper = styled.div`
+  height: 10.42vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MenuButton = styled.div`
+  width: 800px;
+  height: 100px;
+  border-radius: 5px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StepLabel = styled.div`
+  display: flex;
+  align-items: center;
+  & > * {
+    margin-right: 20px;
+  }
+`;
+
+const StepLabelNo = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: #000;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MenuDetail = () => {
+  const {item, setItem, items, setItems} = useContext(MenuContext);
+  const onBackClicked = () => {
+    setItem(null);
+  }
+  const addToCart = () => {
+    setItems(items.concat(item));
+    setItem(null);
+  }
   return (
     <>
       <MenuWrapper>
-        <MenuTab index={menuTabIndex} onClick={selectMenuTab}></MenuTab>
-        <MenuList index={menuTabIndex}></MenuList>
+        <MenuNav>
+          <BackBtn>
+            <SmSpanBlack onClick={onBackClicked}>{'<'} Back</SmSpanBlack>
+          </BackBtn>
+          <SmSpanBlack>선택한 메뉴를 확인해 주세요</SmSpanBlack>
+          <BlankDiv />
+        </MenuNav>
+        <MenuIntro>
+          <StepLabel>
+            <StepLabelNo><XsSpanWhite>1</XsSpanWhite></StepLabelNo>
+            <SmSpanBlack>선택한 메뉴</SmSpanBlack>
+          </StepLabel>
+          <SmSpanBlack>{item.menuName} {item.price}원</SmSpanBlack>
+        </MenuIntro>
+        <MenuSub>
+          <SubMenu item={item}></SubMenu>          
+        </MenuSub>
+        <MenuPrice>
+          <StepLabel>
+            <StepLabelNo><XsSpanWhite>2</XsSpanWhite></StepLabelNo>
+            <SmSpanBlack>주문금액</SmSpanBlack>
+            <SmSpanPrimary>{item.price}원</SmSpanPrimary>
+          </StepLabel>
+          {/* <SmSpanBlack>수량선택 <SmSpanLightGray>1</SmSpanLightGray></SmSpanBlack> */}
+        </MenuPrice>
+        <MenuButtonWrapper>
+          <MenuButton onClick={addToCart}>
+            <MdSpanWhite>카트담기</MdSpanWhite>
+          </MenuButton>
+        </MenuButtonWrapper>
       </MenuWrapper>
     </>
   );
 }
 
-export default Menu;
+export default MenuDetail;

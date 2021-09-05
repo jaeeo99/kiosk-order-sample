@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { SmSpanBlack, SmSpanPrimary, XsSpanLightGray } from '../../StyledText';
 import { menuTabItems, menuList } from '../../../data/menu';
-import { MenuContext } from '../../../data/context';
+import { IItem, MenuContext } from '../../../data/context';
 
 interface IActivable {
   active?: boolean;
@@ -71,21 +71,13 @@ const MenuListImage = styled.img<IFlexable>`
 interface IMenuList {
   index: number;
 }
-
-interface IMenu {
-  type: string;
-  menuName: string;
-  menuInfo?: string;
-  price: number;
-}
-
 const MenuList = (props: IMenuList) => {
   const {index} = props;
-  const [menus, setMenus] = useState<IMenu[]>([]);
+  const [menus, setMenus] = useState<IItem[]>([]);
   const [menuLength, setMenuLength] = useState(0);
-  const {items, setItems} = useContext(MenuContext);
-  const onMenuClick = (menu: IMenu) => {
-    setItems(items.concat(menu));
+  const {items, setItems, item, setItem} = useContext(MenuContext);
+  const onMenuClick = (menu: IItem) => {
+    setItem(menu);
   };
   useEffect(() => {
     setMenus(menuList.filter((menu) => menu.type == menuTabItems[index].type));
@@ -94,11 +86,11 @@ const MenuList = (props: IMenuList) => {
   return (
     <MenuListWrapper size={menuLength}>
       {menus.map((menu, idx) => 
-        <MenuListItem key={idx} onClick={() => onMenuClick(Object.assign(menu, {img: `/menu/${menu.type}_${idx}.png`}))}>
-          <MenuListImage src={`/menu/${menu.type}_${idx}.png`} size={menuLength}/>
-          <SmSpanBlack margin="10px">{menu.menuName}</SmSpanBlack>
-          {menu.menuInfo && <XsSpanLightGray margin="0 10px 10px">{menu.menuInfo}</XsSpanLightGray>}
-          <SmSpanPrimary>{menu.price}원</SmSpanPrimary>
+        <MenuListItem key={idx} onClick={() => onMenuClick(Object.assign(menu, {img: `/menu/${menu?.type}_${idx}.png`}))}>
+          <MenuListImage src={`/menu/${menu?.type}_${idx}.png`} size={menuLength}/>
+          <SmSpanBlack margin="10px">{menu?.menuName}</SmSpanBlack>
+          {menu?.menuInfo && <XsSpanLightGray margin="0 10px 10px">{menu?.menuInfo}</XsSpanLightGray>}
+          <SmSpanPrimary>{menu?.price}원</SmSpanPrimary>
         </MenuListItem>
       )}
     </MenuListWrapper>

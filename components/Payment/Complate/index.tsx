@@ -27,6 +27,7 @@ const ComplateOrderNo = styled.div`
     font-family: S-CoreDream-9;
     font-size: 200px;
     font-weight: 900;
+    color: #df0000;
   }
 `;
 
