@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {MdSpanWhite, SmSpanBlack, SmSpanLightGray, SmSpanPrimary, SmSpanWhite} from '../StyledText';
-import {IItem, MenuContext, PageContext} from '../../data/context';
+import {IItem, MenuContext, PageContext, ModalContext} from '../../data/context';
 
 interface IActivable {
   active?: boolean;
@@ -167,9 +167,9 @@ const CartItem = (props: ICartItem) => {
 }
 
 const Cart = () => {
-  const menu = useContext(MenuContext);
-  const {items, setItems} = menu;
-  const {setPage} = useContext(PageContext);
+  const {items, setItems} = useContext(MenuContext);
+  // const {setPage} = useContext(PageContext);
+  const {openModal} = useContext(ModalContext);
   const [active, setActive] = useState(false);
   const [position, setPosition] = useState(0);
   const [arrowActivate, setArrowActivate] = useState({left: false, right: false});
@@ -186,7 +186,8 @@ const Cart = () => {
   const setPaymentOrder = (e: any) => {
     if(active) {
       e.preventDefault();
-      setPage("payment");
+      // setPage("payment");
+      openModal('packing');
     }
   }
 

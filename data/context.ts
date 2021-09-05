@@ -41,8 +41,24 @@ const step: IStep = {
   setStep: (step: number) => {}
 }
 
+export interface IModal {
+  active: boolean;
+  modal: string;
+  openModal: (page: string) => void;
+  closeModal: () => void;
+}
+
+const modal: IModal = {
+  active: false,
+  modal: '',
+  openModal: () => {},
+  closeModal: () => {},
+}
+
 export const MenuContext = createContext(menu);
 
 export const PageContext = createContext(page);
 
 export const StepContext = createContext(step);
+
+export const ModalContext = createContext(modal);
