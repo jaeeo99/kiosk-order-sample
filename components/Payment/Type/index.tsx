@@ -83,7 +83,7 @@ const Type = () => {
           <OrderTypeIcon src="/order/ic_payment_card.png" />
           <SmSpanBlack>신용카드</SmSpanBlack>
         </OrderType>
-        <OrderType onClick={() => setStep(2)}>
+        <OrderType>
           <OrderTypeIcon src="/order/ic_payment_payco.png" />
           <SmSpanBlack>페이코</SmSpanBlack>
         </OrderType>

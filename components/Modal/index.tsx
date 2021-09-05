@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import Packing from './Packing';
+import SelectSet from './SelectSet';
 import { ModalContext } from '../../data/context';
 
 const ModalWrapper = styled.div`
@@ -36,7 +37,9 @@ const modalRenderer = (modal: string) => {
     default:
       return <></>;
     case 'packing':
-      return <Packing />
+      return <Packing />;
+    case 'selectSet':
+      return <SelectSet />;
   }
 }
 

@@ -12,6 +12,7 @@ const Index = () => {
   const [pageState, setPageState] = useState('home');
   const [activateModal, setActivateModal] = useState(false);
   const [modalState, setModalState] = useState('');
+  const [modalProps, setModalProps] = useState({});
   const menuContext = {
     item: selectedItem,
     setItem: selectItem,
@@ -24,17 +25,21 @@ const Index = () => {
     setPage: setPageState
   }
 
-  const openModal = (modalName: string) => {
+  const openModal = (modalName: string, modalProps?: any) => {
     setModalState(modalName);
+    setModalProps(modalProps);
     setActivateModal(true);
   }
   const closeModal = () => {
+    setModalState('');
+    setModalProps({});
     setActivateModal(false);
   }
 
   const modalContext = {
     active: activateModal,
     modal: modalState,
+    modalProps: modalProps,
     openModal: openModal,
     closeModal: closeModal
   }

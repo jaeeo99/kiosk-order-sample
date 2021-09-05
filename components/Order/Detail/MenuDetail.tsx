@@ -70,9 +70,6 @@ const SubMenu = (props) => {
   return <SubMenuWrapper>
     <SubMenuImg src={item.img}/>
     <SmSpanBlack>{item.menuName}</SmSpanBlack>
-    {/* <SubMenuBtn>
-      <SmSpanWhite>재료변경</SmSpanWhite>
-    </SubMenuBtn> */}
   </SubMenuWrapper>;
 }
 const MenuPrice = styled.div`
@@ -116,7 +113,8 @@ const StepLabelNo = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
+'menu/sidemenu_8.png';
+'menu/drink_4.png';
 const MenuDetail = () => {
   const {item, setItem, items, setItems} = useContext(MenuContext);
   const onBackClicked = () => {
@@ -144,7 +142,15 @@ const MenuDetail = () => {
           <SmSpanBlack>{item.menuName} {item.price}원</SmSpanBlack>
         </MenuIntro>
         <MenuSub>
-          <SubMenu item={item}></SubMenu>          
+          <SubMenu item={item}></SubMenu>
+          {item.setType === 'largeSet' && <>
+            <SubMenu item={{img: 'menu/sidemenu_8.png', menuName: '프렌치프라이 (L)'}}></SubMenu>
+            <SubMenu item={{img: 'menu/drink_4.png', menuName: '코카콜라 (L)'}}></SubMenu>
+          </>}
+          {item.setType === 'set' && <>
+            <SubMenu item={{img: 'menu/sidemenu_8.png', menuName: '프렌치프라이 (R)'}}></SubMenu>
+            <SubMenu item={{img: 'menu/drink_4.png', menuName: '코카콜라 (R)'}}></SubMenu>
+          </>}
         </MenuSub>
         <MenuPrice>
           <StepLabel>
@@ -152,7 +158,6 @@ const MenuDetail = () => {
             <SmSpanBlack>주문금액</SmSpanBlack>
             <SmSpanPrimary>{item.price}원</SmSpanPrimary>
           </StepLabel>
-          {/* <SmSpanBlack>수량선택 <SmSpanLightGray>1</SmSpanLightGray></SmSpanBlack> */}
         </MenuPrice>
         <MenuButtonWrapper>
           <MenuButton onClick={addToCart}>

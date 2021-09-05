@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { SmSpanBlack, SmSpanPrimary, XsSpanLightGray } from '../../StyledText';
 import { menuTabItems, menuList } from '../../../data/menu';
-import { IItem, MenuContext } from '../../../data/context';
+import { IItem, MenuContext, ModalContext } from '../../../data/context';
 
 interface IActivable {
   active?: boolean;
@@ -71,13 +71,21 @@ const MenuListImage = styled.img<IFlexable>`
 interface IMenuList {
   index: number;
 }
+
+const setableMenuTypes = ['premium', 'whopper', 'burger', 'chicken'];
+
 const MenuList = (props: IMenuList) => {
   const {index} = props;
   const [menus, setMenus] = useState<IItem[]>([]);
   const [menuLength, setMenuLength] = useState(0);
-  const {items, setItems, item, setItem} = useContext(MenuContext);
+  const {setItem} = useContext(MenuContext);
+  const {openModal} = useContext(ModalContext);
   const onMenuClick = (menu: IItem) => {
-    setItem(menu);
+    if(setableMenuTypes.includes(menu.type)){
+      openModal('selectSet', { menu });
+    } else {
+      setItem(menu);
+    }
   };
   useEffect(() => {
     setMenus(menuList.filter((menu) => menu.type == menuTabItems[index].type));

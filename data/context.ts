@@ -44,13 +44,15 @@ const step: IStep = {
 export interface IModal {
   active: boolean;
   modal: string;
-  openModal: (page: string) => void;
+  modalProps?: any;
+  openModal: (modal: string, modalProps?: any) => void;
   closeModal: () => void;
 }
 
 const modal: IModal = {
   active: false,
   modal: '',
+  modalProps: {},
   openModal: () => {},
   closeModal: () => {},
 }

@@ -167,7 +167,7 @@ const CartItem = (props: ICartItem) => {
 }
 
 const Cart = () => {
-  const {items, setItems} = useContext(MenuContext);
+  const {items, setItems, setItem} = useContext(MenuContext);
   // const {setPage} = useContext(PageContext);
   const {openModal} = useContext(ModalContext);
   const [active, setActive] = useState(false);
@@ -186,13 +186,13 @@ const Cart = () => {
   const setPaymentOrder = (e: any) => {
     if(active) {
       e.preventDefault();
-      // setPage("payment");
       openModal('packing');
     }
   }
 
   const clearItems = () => {
     if(active) {
+      setItem(null);
       setItems([]);
     }
   }
