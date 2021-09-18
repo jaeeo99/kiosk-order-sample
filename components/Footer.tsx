@@ -29,6 +29,17 @@ const NavButtonIcon = styled.div`
   height: 50px;
   border-radius: 50px;
   background-color: #ffffff;
+  @media only screen and (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    & > img {
+      width: 20px;
+    }
+  }
+`;
+
+const IconImg = styled.img`
 `;
 
 interface INavButtonItem {
@@ -43,7 +54,7 @@ const NavButtonItem = (props: INavButtonItem) => {
   return (
     <NavButton onClick={onClick} style={{alignSelf: align}}>
       <NavButtonIcon>
-        <img src={icon} />
+        <IconImg src={icon} />
       </NavButtonIcon>
       <SmSpanWhite margin="2px 0 0 0">{text}</SmSpanWhite>
     </NavButton>

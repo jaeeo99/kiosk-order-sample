@@ -25,8 +25,8 @@ const ModalFooter = styled.div`
 `;
 
 const Option = styled.div`
-  width: 385px;
-  height: 470px;
+  width: 35.65vw;
+  height: 24.48vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,11 +41,16 @@ const OptionImgWrapper = styled.div`
 `;
 
 const OptionImg = styled.img`
-
+  @media only screen and (max-width: 768px) {
+    width: 11.11vw;
+  }
 `;
 
 const SelectedImg = styled.img`
   position: absolute;
+  @media only screen and (max-width: 768px) {
+    width: 11.11vw;
+  }
 `;
 
 interface IActivable {
@@ -56,8 +61,8 @@ const ModalFooterBtn = styled.div<IActivable>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 770px;
-  height: 100px;
+  width: 71.3vw;
+  height: 5.21vh;
   border-radius: 5px;
   background-color: ${props => props.active ? '#000' : '#e0e0e0'};
 `;

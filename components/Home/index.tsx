@@ -21,7 +21,6 @@ const Footer = styled.footer`
   align-items: center;
   justify-content: center;
   position: relative;
-  flex-basis: 400px;
   background-color: black;
 `;
 

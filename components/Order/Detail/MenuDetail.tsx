@@ -1,8 +1,8 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
-import { MdSpanWhite, SmSpanBlack, SmSpanLightGray, SmSpanPrimary, SmSpanWhite, XsSpanWhite } from '../../StyledText';
+import { MdSpanWhite, SmSpanBlack, SmSpanPrimary, XsSpanWhite } from '../../StyledText';
 // import { menuTabItems, menuList } from '../../../data/menu';
-import { MenuContext } from '../../../data/context';
+import { MenuContext, IItem } from '../../../data/context';
 
 
 const MenuWrapper = styled.div`
@@ -51,7 +51,7 @@ const SubMenuWrapper = styled.div`
 `;
 
 const SubMenuImg = styled.img`
-  width: 250px;
+  width: 23.15vw;
   margin: 20px;
 `;
 // const SubMenuBtn = styled.div`
@@ -65,11 +65,15 @@ const SubMenuImg = styled.img`
 //   background-color: #000;
 // `;
 
-const SubMenu = (props) => {
+interface ISubmenu {
+  item: IItem | null;
+}
+
+const SubMenu = (props: ISubmenu) => {
   const {item} = props;
   return <SubMenuWrapper>
-    <SubMenuImg src={item.img}/>
-    <SmSpanBlack>{item.menuName}</SmSpanBlack>
+    <SubMenuImg src={item?.img}/>
+    <SmSpanBlack>{item?.menuName}</SmSpanBlack>
   </SubMenuWrapper>;
 }
 const MenuPrice = styled.div`
@@ -87,8 +91,8 @@ const MenuButtonWrapper = styled.div`
 `;
 
 const MenuButton = styled.div`
-  width: 800px;
-  height: 100px;
+  width: 74.07vw;
+  height: 5.21vh;
   border-radius: 5px;
   background-color: #000;
   display: flex;
@@ -112,17 +116,23 @@ const StepLabelNo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media only screen and (max-width: 768px) {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+  }
 `;
-'menu/sidemenu_8.png';
-'menu/drink_4.png';
+
 const MenuDetail = () => {
   const {item, setItem, items, setItems} = useContext(MenuContext);
   const onBackClicked = () => {
     setItem(null);
   }
   const addToCart = () => {
-    setItems(items.concat(item));
-    setItem(null);
+    if (item) {
+      setItems(items.concat(item));
+      setItem(null);
+    }
   }
   return (
     <>
@@ -139,15 +149,19 @@ const MenuDetail = () => {
             <StepLabelNo><XsSpanWhite>1</XsSpanWhite></StepLabelNo>
             <SmSpanBlack>선택한 메뉴</SmSpanBlack>
           </StepLabel>
-          <SmSpanBlack>{item.menuName} {item.price}원</SmSpanBlack>
+          <SmSpanBlack>
+            {item?.setType === 'largeSet' && `${item?.menuName} 라지 세트 ${parseInt(item?.price || '', 10) + 2700}원` }
+            {item?.setType === 'set' && `${item?.menuName} 세트 ${parseInt(item?.price || '', 10) + 2000}원` }
+            {item?.setType === 'normal' && `${item?.menuName} ${item?.price}원` }
+          </SmSpanBlack>
         </MenuIntro>
         <MenuSub>
           <SubMenu item={item}></SubMenu>
-          {item.setType === 'largeSet' && <>
+          {item?.setType === 'largeSet' && <>
             <SubMenu item={{img: 'menu/sidemenu_8.png', menuName: '프렌치프라이 (L)'}}></SubMenu>
             <SubMenu item={{img: 'menu/drink_4.png', menuName: '코카콜라 (L)'}}></SubMenu>
           </>}
-          {item.setType === 'set' && <>
+          {item?.setType === 'set' && <>
             <SubMenu item={{img: 'menu/sidemenu_8.png', menuName: '프렌치프라이 (R)'}}></SubMenu>
             <SubMenu item={{img: 'menu/drink_4.png', menuName: '코카콜라 (R)'}}></SubMenu>
           </>}
@@ -156,7 +170,11 @@ const MenuDetail = () => {
           <StepLabel>
             <StepLabelNo><XsSpanWhite>2</XsSpanWhite></StepLabelNo>
             <SmSpanBlack>주문금액</SmSpanBlack>
-            <SmSpanPrimary>{item.price}원</SmSpanPrimary>
+            <SmSpanPrimary>
+              {item?.setType === 'largeSet' && `${parseInt(item?.price || '', 10) + 2700}원` }
+              {item?.setType === 'set' && `${parseInt(item?.price || '', 10) + 2000}원` }
+              {item?.setType === 'normal' && `${item?.price}원` }
+            </SmSpanPrimary>
           </StepLabel>
         </MenuPrice>
         <MenuButtonWrapper>

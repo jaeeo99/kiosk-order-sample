@@ -4,7 +4,7 @@ import {MenuContext, PageContext, StepContext, IItem} from '../../../data/contex
 import { MdSpanBlack, MdSpanPrimary, MdSpanWhite, SmSpanBlack, SmSpanLightBlack, SmSpanBoldGray, SmSpanPrimary } from '../../StyledText';
 
 const OrderedItemWrapper = styled.div`
-  height: 420px;
+  height: 21.87vh;
   background-color: #fff;
 `;
 
@@ -14,7 +14,7 @@ const OrderedItemTitle = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 220px;
+  height: 11.46vh;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   & > span {
     margin: 14px 0;
@@ -28,7 +28,7 @@ const OrderedItemTitle = styled.div`
 
 const OrderedItemSize = styled.div`
   padding: 0 65px;
-  height: 100px;
+  height: 5.21vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,11 +36,14 @@ const OrderedItemSize = styled.div`
 
 const OrderedItemPrice = styled.div`
   padding: 0 65px;
-  height: 100px;
+  height: 5.21vh;
   background-color: #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const OrderedItemImg = styled.img`
 `;
 
 interface IOrderedItem {
@@ -53,7 +56,7 @@ const OrderedItem = (props: IOrderedItem) => {
     <OrderedItemTitle>
       <MdSpanBlack>{item?.menuName}</MdSpanBlack>
       <MdSpanPrimary>{item?.price}원</MdSpanPrimary>
-      <img src={item?.img}/>
+      <OrderedItemImg src={item?.img}/>
     </OrderedItemTitle>
     <OrderedItemSize>
       <SmSpanBoldGray>수량</SmSpanBoldGray>
@@ -128,7 +131,7 @@ const Confirm = () => {
   const {items} = useContext(MenuContext);
   const {setPage} = useContext(PageContext);
   const {setStep} = useContext(StepContext);
-  const price = items.reduce((total, item) => total + parseInt(item?.price, 10), 0);
+  const price = items.reduce((total, item) => total + parseInt(item?.price || '', 10), 0);
   return <>
     <OrderedMenuArea>
       {items.map((item, idx) => <OrderedItem key={idx} item={item} />)}

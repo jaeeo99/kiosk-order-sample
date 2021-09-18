@@ -26,6 +26,9 @@ const MenuTabItem = styled.div<IActivable>`
   overflow: hidden;
   color: ${props => props.active ? '#de0000' : 'rgba(0, 0, 0, 0.4)'};
   border-bottom: ${props => props.active ? '10px solid #de0000' : ''};
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 interface IMenuTab {
@@ -65,7 +68,11 @@ const MenuListItem = styled.div`
 
 const MenuListImage = styled.img<IFlexable>`
   margin: 10px;
-  width: ${props => props.size === 6 ? '23.15vw' : '18.5vw'}
+  width: ${props => props.size === 6 ? '23.15vw' : '18.5vw'};
+  @media only screen and (max-width: 768px) {
+    width: ${props => props.size === 6 ? '23.15vw' : '10vw'};
+    margin: 5px;
+  }
 `;
 
 interface IMenuList {
@@ -81,7 +88,7 @@ const MenuList = (props: IMenuList) => {
   const {setItem} = useContext(MenuContext);
   const {openModal} = useContext(ModalContext);
   const onMenuClick = (menu: IItem) => {
-    if(setableMenuTypes.includes(menu.type)){
+    if(setableMenuTypes.includes(menu?.type || '')){
       openModal('selectSet', { menu });
     } else {
       setItem(menu);

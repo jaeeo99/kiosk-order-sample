@@ -38,7 +38,7 @@ const Stepper = (props: IStepper) => {
     {paymentSteps.map((paymentStep, idx) => (
       <StepItem key={idx} passed={idx <= step}>
         <XsSpanBoldGray>STEP {paymentStep.no}</XsSpanBoldGray>
-        {step === idx && <SmSpanBlack margin="10px 0">{paymentStep.name}</SmSpanBlack>}
+        {step === idx && <SmSpanBlack margin="10px 0 0">{paymentStep.name}</SmSpanBlack>}
       </StepItem>
     ))}
   </StepperWrapper>);

@@ -1,24 +1,25 @@
 import {createContext} from 'react';
 
 export interface IItem {
-  type: string;
-  menuName: string;
+  type?: string;
+  menuName?: string;
   menuInfo?: string;
-  price: string;
+  price?: string;
   img?: string;
+  setType?: string;
 }
 export interface IMenu {
   item: IItem | null,
   items: IItem[],
   setItem: (item: IItem | null) => void,
-  setItems: (items: IItem[] | null) => void,
+  setItems: (items: IItem[]) => void,
 }
 
 const menu: IMenu = {
   item: null,
   items: [],
   setItem: (item: IItem | null) => {},
-  setItems: (items: IItem[] | null) => {}
+  setItems: (items: IItem[]) => {}
 }
 
 export interface IPage {

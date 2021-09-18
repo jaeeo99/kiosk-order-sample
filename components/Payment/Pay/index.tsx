@@ -4,24 +4,27 @@ import {MenuContext, PageContext, StepContext} from '../../../data/context';
 import { LgSpanBlack, LgSpanPrimary, MdSpanBlack, MdSpanPrimary, MdSpanWhite } from '../../StyledText';
 
 const SelectOrderTypeArea = styled.div`
-  flex: 11.3 11.3 1130px;
+  height: 58.85vh;
   background-color: #f2f2f2;
 `;
 
 const StepTitle = styled.div`
   width: 100%;
-  height: 380px;
+  height: 19.79vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   & > span {
     line-height: 72px;
+    @media only screen and (max-width: 768px) {
+      line-height: 48px;
+    }
   }
 `;
 
 const OrderCancelArea = styled.div`
-  flex: 3.2 3.2 320px;
+  height: 16.67vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +32,7 @@ const OrderCancelArea = styled.div`
 
 const OrderPriceArea = styled.div`
   width: calc(100% - 130px);
-  height: 155px;
+  height: 8.07vh;
   padding: 0 65px;
   display: flex;
   align-items: center;
@@ -38,8 +41,8 @@ const OrderPriceArea = styled.div`
 
 const OrderCancelButton = styled.div`
   position: relative;
-  width: 770px;
-  height: 100px;
+  width: 71.3vw;
+  height: 5.21vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,13 +53,16 @@ const OrderCancelButton = styled.div`
 const InsertImage = styled.img`
   display: block;
   margin: 0 auto;
+  @media only screen and (max-width: 768px) {
+    width: 25.45vw;
+  }
 `
 
 const Pay = () => {
   const {items} = useContext(MenuContext);
   const {setPage} = useContext(PageContext);
   const {setStep} = useContext(StepContext);
-  const price = items.reduce((total, item) => total + parseInt(item.price, 10), 0);
+  const price = items.reduce((total, item) => total + parseInt(item.price || '', 10), 0);
   return <>
     <SelectOrderTypeArea>
       <StepTitle>

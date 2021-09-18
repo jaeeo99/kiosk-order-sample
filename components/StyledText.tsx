@@ -10,6 +10,9 @@ export const LgSpanBlack = styled.span<ISpan>`
   font-size: 60px;
   font-weight: 800;
   color: #000000;
+  @media only screen and (max-width: 768px) {
+    font-size: 40px;
+  }
 `;
 
 export const LgSpanWhite = styled.span<ISpan>`
@@ -18,6 +21,9 @@ export const LgSpanWhite = styled.span<ISpan>`
   font-size: 60px;
   font-weight: 800;
   color: #ffffff;
+  @media only screen and (max-width: 768px) {
+    font-size: 40px;
+  }
 `;
 
 export const LgSpanPrimary = styled.span<ISpan>`
@@ -26,6 +32,9 @@ export const LgSpanPrimary = styled.span<ISpan>`
   font-size: 60px;
   font-weight: 800;
   color: #de0000;
+  @media only screen and (max-width: 768px) {
+    font-size: 40px;
+  }
 `;
 
 export const MdSpanBlack = styled.span<ISpan>`
@@ -34,6 +43,9 @@ export const MdSpanBlack = styled.span<ISpan>`
   font-size: 40px;
   font-weight: 800;
   color: #000000;
+  @media only screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 
 export const MdSpanWhite = styled.span<ISpan>`
@@ -42,6 +54,9 @@ export const MdSpanWhite = styled.span<ISpan>`
   font-size: 40px;
   font-weight: 800;
   color: #ffffff;
+  @media only screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 
 export const MdSpanPrimary = styled.span<ISpan>`
@@ -50,6 +65,9 @@ export const MdSpanPrimary = styled.span<ISpan>`
   font-size: 40px;
   font-weight: 800;
   color: #de0000;
+  @media only screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 
 export const SmSpanBlack = styled.span<ISpan>`
@@ -58,6 +76,9 @@ export const SmSpanBlack = styled.span<ISpan>`
   font-size: 30px;
   font-weight: 800;
   color: #000000;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const SmSpanLightBlack = styled.span<ISpan>`
@@ -66,6 +87,9 @@ export const SmSpanLightBlack = styled.span<ISpan>`
   font-size: 30px;
   font-weight: 400;
   color: #000000;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const SmSpanWhite = styled.span<ISpan>`
@@ -74,6 +98,9 @@ export const SmSpanWhite = styled.span<ISpan>`
   font-size: 30px;
   font-weight: 800;
   color: #ffffff;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const SmSpanPrimary = styled.span<ISpan>`
@@ -82,6 +109,9 @@ export const SmSpanPrimary = styled.span<ISpan>`
   font-size: 30px;
   font-weight: 800;
   color: #de0000;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const SmSpanLightGray = styled.span<ISpan>`
@@ -90,6 +120,9 @@ export const SmSpanLightGray = styled.span<ISpan>`
   font-size: 30px;
   font-weight: 600;
   color: #bdbdbd;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const SmSpanBoldGray = styled.span<ISpan>`
@@ -98,6 +131,9 @@ export const SmSpanBoldGray = styled.span<ISpan>`
   font-size: 30px;
   font-weight: 600;
   color: rgba(0,0,0,0.6);
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const XsSpanBlack = styled.span<ISpan>`
@@ -106,6 +142,9 @@ export const XsSpanBlack = styled.span<ISpan>`
   font-size: 20px;
   font-weight: 800;
   color: #000000;
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const XsSpanWhite = styled.span<ISpan>`
@@ -114,6 +153,9 @@ export const XsSpanWhite = styled.span<ISpan>`
   font-size: 20px;
   font-weight: 800;
   color: #ffffff;
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const XsSpanBoldGray = styled.span<ISpan>`
@@ -122,6 +164,9 @@ export const XsSpanBoldGray = styled.span<ISpan>`
   font-size: 20px;
   font-weight: 600;
   color: rgba(0,0,0,0.6);
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const XsSpanLightGray = styled.span<ISpan>`
@@ -130,4 +175,7 @@ export const XsSpanLightGray = styled.span<ISpan>`
   font-size: 20px;
   font-weight: 600;
   color: #bdbdbd;
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;

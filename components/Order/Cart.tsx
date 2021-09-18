@@ -43,7 +43,7 @@ const CartWrapper = styled.div`
 
 const CartInfo = styled.div`
   display: flex;
-  flex-basis: 100px;
+  height: 5.21vh;
   background-color: #e0e0e0;
 `;
 
@@ -74,12 +74,15 @@ const Price = styled.span<IActivable>`
   font-size: 30px;
   font-weight: 700;
   color: ${props => props.active ? '#de0000' : '#828282'};
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const CartItemList = styled.div`
+  height: 11.46vh;
   display: flex;
   align-items: center;
-  flex-basis: 220px;
   background-color: #e0e0e0;
 `;
 
@@ -93,6 +96,9 @@ const CartItemsController = styled.div<IActivable>`
   font-size: 40px;
   font-weight: 900;
   color: #ffffff;
+  @media only screen and (max-width: 768px) {
+    font-size: 25px;
+  }
 `;
 
 const CartItems = styled.div`
@@ -101,8 +107,8 @@ const CartItems = styled.div`
 `;
 
 const CartItemsWrapper = styled.div<ISlideItems>`
-  width: ${props => props.itemLength ? props.itemLength * 370 + 'px' : '0'};
-  transform: translateX(${props => props.position ? `-${props.position * 370}px` : '0px'});
+  width: ${props => props.itemLength ? props.itemLength * 34.25 + 'vw' : '0'};
+  transform: translateX(${props => props.position ? `-${props.position * 34.25}vw` : '0px'});
   transition: .2s transform;
 `
 
@@ -131,6 +137,9 @@ const CartItemClose = styled.div`
   justify-content: center;
   font-size: 30px;
   font-weight: 900;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const CartItemsEmptyWrapper = styled.div`
@@ -153,7 +162,7 @@ const CartItem = (props: ICartItem) => {
   const menu = useContext(MenuContext);
   const {items, setItems} = menu;
   const onClickDelete = () => {
-    const temp = [].concat(items);
+    const temp = Object.assign([], items);
     temp.splice(idx,1)
     setItems(temp);
   }
@@ -168,18 +177,17 @@ const CartItem = (props: ICartItem) => {
 
 const Cart = () => {
   const {items, setItems, setItem} = useContext(MenuContext);
-  // const {setPage} = useContext(PageContext);
   const {openModal} = useContext(ModalContext);
   const [active, setActive] = useState(false);
   const [position, setPosition] = useState(0);
   const [arrowActivate, setArrowActivate] = useState({left: false, right: false});
   const onClickLeftArrow = () => {
-    if(arrowActivate.left) {
+    if(arrowActivate?.left) {
       setPosition(position - 1);
     }
   };
   const onClickRightArrow = () => {
-    if(arrowActivate.right) {
+    if(arrowActivate?.right) {
       setPosition(position + 1);
     }
   }
@@ -207,7 +215,7 @@ const Cart = () => {
       left: leftActivate,
       right: rightActivate
     });
-    if (position > items.length - 2) {
+    if (position > items.length - 2 && items.length - 2 >= 0) {
       setPosition(items.length - 2);
     }
   }, [position, items]);
@@ -223,7 +231,7 @@ const Cart = () => {
         </ItemSize>
         <ItemsPrice>
           <SmSpanBlack>총 주문 금액</SmSpanBlack>
-          <Price active={items.length !== 0}>{items.reduce((total, item) => total + parseInt(item.price, 10), 0)}원</Price>
+          <Price active={items.length !== 0}>{items.reduce((total, item) => total + parseInt(item.price || '', 10), 0)}원</Price>
         </ItemsPrice>
       </CartInfo>
       <CartItemList>

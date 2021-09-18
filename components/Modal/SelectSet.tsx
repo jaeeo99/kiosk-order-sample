@@ -33,8 +33,8 @@ const ModalFooterBtn = styled.div<IActivable>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 770px;
-  height: 100px;
+  width: 71.3vw;
+  height: 5.21vh;
   border-radius: 5px;
   background-color: ${props => props.active ? '#000' : '#e0e0e0'};
 `;
@@ -45,6 +45,11 @@ const Option = styled.div`
   display: flex;
   padding: 65px;
   align-items: center;
+  @media only screen and (max-width: 768px) {
+    padding: 50px 30px;
+    height: calc(13.54vh - 60px);
+    width: calc(100% - 100px);
+  }
 `;
 
 const OptionSelectedWrapper = styled.div`
@@ -56,6 +61,7 @@ const OptionSelectedWrapper = styled.div`
 
 const OptionSelected = styled.img`
   margin: 15px 0;
+  width: 4.63vw;
 `;
 
 const OptionDetail = styled.div`
@@ -74,7 +80,7 @@ const OptionImgWrapper = styled.div`
 `;
 
 const OptionImg = styled.img`
-  width: 200px;
+  width: 18.52vw;
 `;
 
 const SelectSet = () => {
