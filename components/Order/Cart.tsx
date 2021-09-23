@@ -157,7 +157,7 @@ interface ICartItem {
 
 const CartItem = (props: ICartItem) => {
   const {item, idx} = props;
-  const {menuName, price} = item;
+  const {menuName, price, setType} = item;
 
   const menu = useContext(MenuContext);
   const {items, setItems} = menu;
@@ -166,11 +166,23 @@ const CartItem = (props: ICartItem) => {
     temp.splice(idx,1)
     setItems(temp);
   }
+  const getPrice = () => {
+    switch(setType) {
+      case 'largeSet':
+        return parseInt(price || '', 10) + 2700;
+      case 'set':
+        return parseInt(price || '', 10) + 2000;
+      case 'normal':
+      default:
+        return parseInt(price || '', 10);
+    }
+  }
+  const menuPrice = getPrice();
   return (
     <CartItemWrapper>
       <CartItemClose onClick={onClickDelete}>X</CartItemClose>
-      <SmSpanBlack>{menuName}</SmSpanBlack>
-      <SmSpanPrimary>{price}원</SmSpanPrimary>
+      <SmSpanBlack>{menuName} {setType === 'largeSet' && '라지세트'}{setType === 'set' && '세트'}</SmSpanBlack>
+      <SmSpanPrimary>{menuPrice}원</SmSpanPrimary>
     </CartItemWrapper>
   );
 }
@@ -220,6 +232,18 @@ const Cart = () => {
     }
   }, [position, items]);
   
+  const price = items.reduce((total, item) => {
+    switch(item?.setType) {
+      case "largeSet":
+        return total + parseInt(item?.price || '', 10) + 2700;
+      case "set":
+        return total + parseInt(item?.price || '', 10) + 2000;
+      case "normal":
+      default:
+        return total + parseInt(item?.price || '', 10);
+    }
+  }, 0);
+  
   return (
     <CartWrapper>
       <CartInfo>
@@ -231,7 +255,7 @@ const Cart = () => {
         </ItemSize>
         <ItemsPrice>
           <SmSpanBlack>총 주문 금액</SmSpanBlack>
-          <Price active={items.length !== 0}>{items.reduce((total, item) => total + parseInt(item.price || '', 10), 0)}원</Price>
+          <Price active={items.length !== 0}>{price}원</Price>
         </ItemsPrice>
       </CartInfo>
       <CartItemList>

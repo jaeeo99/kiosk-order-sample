@@ -52,11 +52,24 @@ interface IOrderedItem {
 
 const OrderedItem = (props: IOrderedItem) => {
   const {item} = props;
+  const {menuName, price, img, setType} = item;
+  const getPrice = () => {
+    switch(setType) {
+      case 'largeSet':
+        return parseInt(price || '', 10) + 2700;
+      case 'set':
+        return parseInt(price || '', 10) + 2000;
+      case 'normal':
+      default:
+        return parseInt(price || '', 10);
+    }
+  }
+  const menuPrice = getPrice();
   return <OrderedItemWrapper>
     <OrderedItemTitle>
-      <MdSpanBlack>{item?.menuName}</MdSpanBlack>
-      <MdSpanPrimary>{item?.price}원</MdSpanPrimary>
-      <OrderedItemImg src={item?.img}/>
+      <MdSpanBlack>{menuName} {setType === 'largeSet' && '라지세트'}{setType === 'set' && '세트'}</MdSpanBlack>
+      <MdSpanPrimary>{menuPrice}원</MdSpanPrimary>
+      <OrderedItemImg src={img}/>
     </OrderedItemTitle>
     <OrderedItemSize>
       <SmSpanBoldGray>수량</SmSpanBoldGray>
@@ -64,7 +77,7 @@ const OrderedItem = (props: IOrderedItem) => {
     </OrderedItemSize>
     <OrderedItemPrice>
       <SmSpanBlack>합계금액</SmSpanBlack>
-      <SmSpanPrimary>{item?.price}원</SmSpanPrimary>
+      <SmSpanPrimary>{menuPrice}원</SmSpanPrimary>
     </OrderedItemPrice>
   </OrderedItemWrapper>;
 }
@@ -131,7 +144,17 @@ const Confirm = () => {
   const {items} = useContext(MenuContext);
   const {setPage} = useContext(PageContext);
   const {setStep} = useContext(StepContext);
-  const price = items.reduce((total, item) => total + parseInt(item?.price || '', 10), 0);
+  const price = items.reduce((total, item) => {
+    switch(item?.setType) {
+      case "largeSet":
+        return total + parseInt(item?.price || '', 10) + 2700;
+      case "set":
+        return total + parseInt(item?.price || '', 10) + 2000;
+      case "normal":
+      default:
+        return total + parseInt(item?.price || '', 10);
+    }
+  }, 0);
   return <>
     <OrderedMenuArea>
       {items.map((item, idx) => <OrderedItem key={idx} item={item} />)}

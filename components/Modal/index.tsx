@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import Packing from './Packing';
 import SelectSet from './SelectSet';
+import UpgradeSet from './UpgradeSet';
 import { ModalContext } from '../../data/context';
 
 const ModalWrapper = styled.div`
@@ -27,7 +28,7 @@ const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 83.33vw;
-  min-height: 47.92vh;
+  // min-height: 47.92vh;
   background-color: #fff;
   z-index: 1001;
 `;
@@ -40,6 +41,8 @@ const modalRenderer = (modal: string) => {
       return <Packing />;
     case 'selectSet':
       return <SelectSet />;
+    case 'upgradeSet':
+      return <UpgradeSet />;
   }
 }
 

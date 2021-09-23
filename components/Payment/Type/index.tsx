@@ -73,7 +73,17 @@ const Type = () => {
   const {items} = useContext(MenuContext);
   const {setPage} = useContext(PageContext);
   const {setStep} = useContext(StepContext);
-  const price = items.reduce((total, item) => total + parseInt(item.price || '', 10), 0);
+  const price = items.reduce((total, item) => {
+    switch(item?.setType) {
+      case "largeSet":
+        return total + parseInt(item?.price || '', 10) + 2700;
+      case "set":
+        return total + parseInt(item?.price || '', 10) + 2000;
+      case "normal":
+      default:
+        return total + parseInt(item?.price || '', 10);
+    }
+  }, 0);
   return <>
     <SelectOrderTypeArea>
       <StepTitle>

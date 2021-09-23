@@ -85,13 +85,17 @@ const OptionImg = styled.img`
 
 const SelectSet = () => {
   const [selected, setSelected] = useState('');
-  const { modalProps, closeModal } = useContext(ModalContext);
+  const { modalProps, openModal, closeModal } = useContext(ModalContext);
   const { menu } = modalProps;
-  const {setItem} = useContext(MenuContext);
+  const { setItem } = useContext(MenuContext);
   const onBtnClicked = () => {
     if(!!selected) {
-      closeModal();
-      setItem(Object.assign(menu, {setType: selected}));
+      if (selected === 'largeSet') {
+        closeModal();
+        setItem(Object.assign(menu, {setType: selected}));
+        return;
+      }
+      openModal('upgradeSet', { menu, selected });
     }
   }
   return <>
