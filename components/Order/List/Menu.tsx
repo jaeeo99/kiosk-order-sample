@@ -26,7 +26,7 @@ const MenuTabItem = styled.div<IActivable>`
   overflow: hidden;
   color: ${props => props.active ? '#de0000' : 'rgba(0, 0, 0, 0.4)'};
   border-bottom: ${props => props.active ? '10px solid #de0000' : ''};
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 20px;
   }
 `;
@@ -69,7 +69,7 @@ const MenuListItem = styled.div`
 const MenuListImage = styled.img<IFlexable>`
   margin: 10px;
   width: ${props => props.size === 6 ? '23.15vw' : '18.5vw'};
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     width: ${props => props.size === 6 ? '23.15vw' : '10vw'};
     margin: 5px;
   }

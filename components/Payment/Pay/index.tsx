@@ -17,7 +17,7 @@ const StepTitle = styled.div`
   justify-content: center;
   & > span {
     line-height: 72px;
-    @media only screen and (max-width: 820px) {
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
       line-height: 48px;
     }
   }
@@ -53,7 +53,7 @@ const OrderCancelButton = styled.div`
 const InsertImage = styled.img`
   display: block;
   margin: 0 auto;
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     width: 25.45vw;
   }
 `

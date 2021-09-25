@@ -59,7 +59,7 @@ const ImgWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 65px;
+  margin-bottom: 3.4vh;
 `;
 
 const Img = styled.img`

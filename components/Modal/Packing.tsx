@@ -41,14 +41,14 @@ const OptionImgWrapper = styled.div`
 `;
 
 const OptionImg = styled.img`
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     width: 11.11vw;
   }
 `;
 
 const SelectedImg = styled.img`
   position: absolute;
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     width: 11.11vw;
   }
 `;

@@ -45,7 +45,7 @@ const Option = styled.div`
   display: flex;
   padding: 65px;
   align-items: center;
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     padding: 50px 30px;
     height: calc(13.54vh - 60px);
     width: calc(100% - 100px);

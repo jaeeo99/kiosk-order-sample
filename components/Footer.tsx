@@ -29,7 +29,7 @@ const NavButtonIcon = styled.div`
   height: 50px;
   border-radius: 50px;
   background-color: #ffffff;
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     width: 30px;
     height: 30px;
     border-radius: 30px;
@@ -62,11 +62,12 @@ const NavButtonItem = (props: INavButtonItem) => {
 }
 
 const NavFooter = () => {
-  const {setItems} = useContext(MenuContext);
+  const {setItem, setItems} = useContext(MenuContext);
   const {setPage} = useContext(PageContext);
   const handleClick = (e: any) => {
     e.preventDefault();
     setPage("home");
+    setItem(null);
     setItems([]);
   }
   return (

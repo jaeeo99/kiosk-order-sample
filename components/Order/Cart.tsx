@@ -74,7 +74,7 @@ const Price = styled.span<IActivable>`
   font-size: 30px;
   font-weight: 700;
   color: ${props => props.active ? '#de0000' : '#828282'};
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 20px;
   }
 `;
@@ -96,7 +96,7 @@ const CartItemsController = styled.div<IActivable>`
   font-size: 40px;
   font-weight: 900;
   color: #ffffff;
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 25px;
   }
 `;
@@ -137,7 +137,7 @@ const CartItemClose = styled.div`
   justify-content: center;
   font-size: 30px;
   font-weight: 900;
-  @media only screen and (max-width: 820px) {
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
     font-size: 20px;
   }
 `;
