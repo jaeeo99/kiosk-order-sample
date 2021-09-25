@@ -36,7 +36,7 @@ const StepTitle = styled.div`
   justify-content: center;
   & > span {
     line-height: 72px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 820px) {
       line-height: 48px;
     }
   }

@@ -29,7 +29,7 @@ const NavButtonIcon = styled.div`
   height: 50px;
   border-radius: 50px;
   background-color: #ffffff;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     width: 30px;
     height: 30px;
     border-radius: 30px;

@@ -6,6 +6,7 @@ export interface IItem {
   menuInfo?: string;
   price?: string;
   img?: string;
+  setImg?: string;
   setType?: string;
 }
 export interface IMenu {

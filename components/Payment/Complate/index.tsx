@@ -14,7 +14,7 @@ const ComplateOrderArea = styled.div`
 
 const ComplateOrderTitle = styled.div`
   margin: 100px;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     margin: 50px; 
   }
 `;
@@ -26,7 +26,7 @@ const ComplateOrderNo = styled.div`
   justify-content: center;
   & > span {
     margin: 20px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 820px) {
       margin: 10px;
     }
   }
@@ -35,7 +35,7 @@ const ComplateOrderNo = styled.div`
     font-size: 200px;
     font-weight: 900;
     color: #df0000;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 820px) {
       font-size: 140px;
     }
   }
@@ -49,7 +49,7 @@ const ComplateOrderMessage = styled.div`
   & > span {
     display: block;
     line-height: 36px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 820px) {
       line-height: 24px;
     }
   }
@@ -57,7 +57,7 @@ const ComplateOrderMessage = styled.div`
 
 const ComplateOrderImage = styled.img`
   margin: 120px;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     width: 180px;
     margin: 55px;
   }

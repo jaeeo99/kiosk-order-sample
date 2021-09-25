@@ -52,7 +52,7 @@ interface IOrderedItem {
 
 const OrderedItem = (props: IOrderedItem) => {
   const {item} = props;
-  const {menuName, price, img, setType} = item;
+  const {menuName, price, img, setImg, setType} = item;
   const getPrice = () => {
     switch(setType) {
       case 'largeSet':
@@ -69,7 +69,7 @@ const OrderedItem = (props: IOrderedItem) => {
     <OrderedItemTitle>
       <MdSpanBlack>{menuName} {setType === 'largeSet' && '라지세트'}{setType === 'set' && '세트'}</MdSpanBlack>
       <MdSpanPrimary>{menuPrice}원</MdSpanPrimary>
-      <OrderedItemImg src={img}/>
+      <OrderedItemImg src={setType === 'set' || setType === 'largeSet' ? setImg : img}/>
     </OrderedItemTitle>
     <OrderedItemSize>
       <SmSpanBoldGray>수량</SmSpanBoldGray>

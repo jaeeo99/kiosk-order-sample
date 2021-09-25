@@ -15,8 +15,6 @@ const menuList = [
   {type: 'special', menuName: '바삭킹&너겟킹10', price: '16000'},
   {type: 'special', menuName: '바삭킹&모짜볼10', price: '15900'},
   {type: 'premium', menuName: '콰트로치즈와퍼', price: '7800'},
-  {type: 'premium', menuName: '몬스터Ⅱ', price: '9500'},
-  {type: 'premium', menuName: '몬스터Ⅱ통새우', price: '10800'},
   {type: 'premium', menuName: '몬스터X', price: '10400'},
   {type: 'premium', menuName: '통새우X', price: '8800'},
   {type: 'premium', menuName: '콰트로치즈X', price: '8800'},
@@ -70,9 +68,8 @@ const menuList = [
 ];
 
 const extraPriceMap = {
-  setPrice: 1000,
-  largeSetPrice: 2000,
-  largeMenuPrice: 200
+  setPrice: 2000,
+  largeSetPrice: 2700
 }
 
 export {

@@ -87,7 +87,7 @@ const SelectSet = () => {
     </ModalHeader>
     <ModalBody>
       <ImgWrapper>
-        <Img src={menu.img}/>
+        <Img src={menu.setImg}/>
       </ImgWrapper>
       <Detail>
         <SmSpanBlack>{menu.menuName} {isSet && '라지'}세트</SmSpanBlack>

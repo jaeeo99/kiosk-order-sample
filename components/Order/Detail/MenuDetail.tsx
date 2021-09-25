@@ -116,7 +116,7 @@ const StepLabelNo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     width: 30px;
     height: 30px;
     border-radius: 30px;

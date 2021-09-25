@@ -26,7 +26,7 @@ const MenuTabItem = styled.div<IActivable>`
   overflow: hidden;
   color: ${props => props.active ? '#de0000' : 'rgba(0, 0, 0, 0.4)'};
   border-bottom: ${props => props.active ? '10px solid #de0000' : ''};
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     font-size: 20px;
   }
 `;
@@ -69,7 +69,7 @@ const MenuListItem = styled.div`
 const MenuListImage = styled.img<IFlexable>`
   margin: 10px;
   width: ${props => props.size === 6 ? '23.15vw' : '18.5vw'};
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     width: ${props => props.size === 6 ? '23.15vw' : '10vw'};
     margin: 5px;
   }
@@ -101,7 +101,7 @@ const MenuList = (props: IMenuList) => {
   return (
     <MenuListWrapper size={menuLength}>
       {menus.map((menu, idx) => 
-        <MenuListItem key={idx} onClick={() => onMenuClick(Object.assign(menu, {img: `/menu/${menu?.type}_${idx}.png`}))}>
+        <MenuListItem key={idx} onClick={() => onMenuClick(Object.assign(menu, {img: `/menu/${menu?.type}_${idx}.png`, setImg: `/menu/${menu?.type}_set_${idx}.png`}))}>
           <MenuListImage src={`/menu/${menu?.type}_${idx}.png`} size={menuLength}/>
           <SmSpanBlack margin="10px">{menu?.menuName}</SmSpanBlack>
           {menu?.menuInfo && <XsSpanLightGray margin="0 10px 10px">{menu?.menuInfo}</XsSpanLightGray>}

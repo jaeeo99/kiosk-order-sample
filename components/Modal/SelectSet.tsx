@@ -45,7 +45,7 @@ const Option = styled.div`
   display: flex;
   padding: 65px;
   align-items: center;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     padding: 50px 30px;
     height: calc(13.54vh - 60px);
     width: calc(100% - 100px);
@@ -113,7 +113,7 @@ const SelectSet = () => {
           <SmSpanPrimary>{parseInt(menu.price, 10) + 2700}원</SmSpanPrimary>
         </OptionDetail>
         <OptionImgWrapper>
-          <OptionImg src={menu.img}/>
+          <OptionImg src={menu.setImg}/>
         </OptionImgWrapper>
       </Option>
       <Option onClick={() => setSelected('set')}>
@@ -126,7 +126,7 @@ const SelectSet = () => {
           <SmSpanPrimary>{parseInt(menu.price, 10) + 2000}원</SmSpanPrimary>
         </OptionDetail>
         <OptionImgWrapper>
-          <OptionImg src={menu.img}/>
+          <OptionImg src={menu.setImg}/>
         </OptionImgWrapper>
       </Option>
       <Option onClick={() => setSelected('normal')}>
